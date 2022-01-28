@@ -22,6 +22,7 @@ export default class AppUpdater {
     log.transports.file.level = 'info';
     autoUpdater.logger = log;
     autoUpdater.checkForUpdatesAndNotify();
+    // autoUpdater.checkForUpdates();
   }
 }
 
@@ -31,6 +32,10 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.on('get-app-version', async (event, arg) => {
+  event.returnValue = app.getVersion();
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -135,3 +140,33 @@ app
     });
   })
   .catch(console.log);
+
+
+  autoUpdater.on('update-available', () => {
+    mainWindow && mainWindow.webContents.send('update_available');
+  });
+  
+  autoUpdater.on('update-downloaded', () => {
+    mainWindow && mainWindow.webContents.send('update_downloaded');
+  });
+
+
+  autoUpdater.on('checking-for-update', () => {
+    console.log('inside checking-for-update')
+  })
+  autoUpdater.on('update-available', (info) => {
+    console.log('inside update-available')
+  })
+  autoUpdater.on('update-not-available', (info) => {
+    console.log('inside update-not-available')
+  })
+  autoUpdater.on('error', (err) => {
+    console.log('inside error')
+  })
+  autoUpdater.on('download-progress', (progressObj) => {
+    console.log('download-progress')
+  })
+  autoUpdater.on('update-downloaded', (info) => {
+    console.log('update-downloaded')
+    // autoUpdater.quitAndInstall();  
+  })
