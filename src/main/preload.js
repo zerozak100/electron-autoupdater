@@ -8,6 +8,9 @@ contextBridge.exposeInMainWorld('electron', {
     getAppVersion() {
       return ipcRenderer.sendSync('get-app-version');
     },
+    restartApp() {
+      ipcRenderer.send('restart-app');
+    },
     on(channel, func) {
       const validChannels = ['ipc-example'];
       if (validChannels.includes(channel)) {

@@ -38,6 +38,10 @@ ipcMain.on('get-app-version', async (event, arg) => {
   event.returnValue = app.getVersion();
 });
 
+ipcMain.on('restart-app', () => {
+  autoUpdater.quitAndInstall();
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -168,5 +172,7 @@ app
   })
   autoUpdater.on('update-downloaded', (info) => {
     console.log('update-downloaded')
-    // autoUpdater.quitAndInstall();  
+    setTimeout(() => {
+      autoUpdater.quitAndInstall();
+    }, 10000)
   })
