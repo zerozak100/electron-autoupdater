@@ -1,5 +1,6 @@
 {
   "name": "electron-react-boilerplate",
+  "version": "0.0.1",
   "description": "A foundation for scalable desktop apps",
   "scripts": {
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
@@ -89,13 +90,13 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": " zerozak100",
+      "repo": "electron-autoupdater"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": "git+https://github.com/zerozak100/electron-autoupdater.git"
   },
   "author": {
     "name": "Electron React Boilerplate Maintainers",
